@@ -39,19 +39,14 @@ contains
         !if (height1 .gt. 5.0) then
 
         if (height .gt. 5.0) then
-            seed_mass_log = (0.049 * height) + 1.0994
+            seed_mass_log = (0.059 * height) + 0.8812
             !print *, "seed_mass_log", seed_mass_log
             ! Converte a massa da semente de escala logarítmica para normal (linear)
             seed_mass = ((10.0 ** seed_mass_log) / 1.0D6)
-            !print *, "Altura da planta:", height, "m, Massa da semente:", seed_mass, "kg"
-
             npp_rep = nppa * 0.04  ! 4% do NPP disponível para reprodução
              ! Calculando o número de sementes produzidas
-            n_seed = (npp_rep / seed_mass)
-            if (n_seed .lt. 1 .and. n_seed .gt. 0) then
-                n_seed = 1
+            n_seed = nint(npp_rep / seed_mass)
             end if
-
             !print *, "---------- n_seed:----------", n_seed
             !npp_after = nppa - npp_rep !remaining npp
         else
