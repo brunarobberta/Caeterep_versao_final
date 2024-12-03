@@ -411,7 +411,7 @@ contains
 
             if (n_seed(p) .gt. 0) then
 
-               seed_bank_out_bdgt(ri) = seed_bank_out_bdgt(ri) + (stored_seed_bank(ri) + n_seed(p))
+               seed_bank_out_bdgt(ri) = seed_bank_out_bdgt(ri) + nint(stored_seed_bank(ri) + n_seed(p))
                if (seed_bank_out_bdgt(ri) .lt. 1 .and. seed_bank_out_bdgt(ri) .gt. 0) then
                   seed_bank_out_bdgt(ri) = 1
               end if
@@ -426,9 +426,9 @@ contains
 
 
          if (seed_bank_out_bdgt(ri) .gt. 0 .and. temp .ge. 23.0) then
-            germinated_seeds(p) = int(seed_bank_out_bdgt(ri) * 0.5)
+            germinated_seeds(p) = nint(seed_bank_out_bdgt(ri) * 0.5)
             !print *, "Germinação: ", germinated_seeds(p), "sementes germinadas para PLS", p
-            seed_bank_out_bdgt(ri) = int(seed_bank_out_bdgt(ri) - germinated_seeds(p))
+            seed_bank_out_bdgt(ri) = nint(seed_bank_out_bdgt(ri) - germinated_seeds(p))
             !print *, "Banco de sementes após germinação:", seed_bank_out_bdgt(ri)
         end if
 
@@ -439,7 +439,6 @@ contains
 
          ! Calcula a biomassa 
          acumulated_biomass(p) = germinated_seeds(p) * seed_mass(p)
-         !acumulated_biomass(p) = real(germinated_seeds(p), kind=8) * seed_mass(p)
 
 
          ! Verifica se o valor de nppa após incremento ultrapassa o limite máximo
